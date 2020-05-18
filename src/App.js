@@ -10,10 +10,27 @@ import ShoppingListPage from './routes/ShoppingListPage/ShoppingListPage'
 import ShoppingRoutePage from './routes/ShoppingRoutePage/ShoppingRoutePage'
 import SignUpPage from './routes/SignUpPage/SignUpPage'
 import SupermarketPage from './routes/SupermarketPage/SupermarketPage'
+import STORE from './dummy-store'
 import './App.css'
 
 
 class App extends React.Component {
+  state = {
+    supermarkets: [],
+    users: [],
+    item_list: []
+  }
+
+  componentDidMount() {
+    this.setState({
+      supermarkets: STORE.supermarkets,
+      users: STORE.users,
+      item_list: STORE.item_list
+    })
+  }
+
+
+
   render() {
     return(
     <div className="App">
@@ -33,6 +50,7 @@ class App extends React.Component {
             component={(props) =>
               <LoginPage 
                 {...props}
+                users = {this.state.users}
               />}
           />
           <Route
@@ -40,6 +58,7 @@ class App extends React.Component {
             component={(props) =>
               <SignUpPage 
                 {...props}
+                users = {this.state.users}
               />}
           />
           <Route
@@ -47,6 +66,7 @@ class App extends React.Component {
             component={(props) =>
               <SupermarketPage 
                 {...props}
+                supermarkets = {this.state.supermarkets}
               />}
           />
           <Route
@@ -54,6 +74,9 @@ class App extends React.Component {
             component={(props) =>
               <ShoppingListPage 
                 {...props}
+                users = {this.state.users}
+                supermarkets = {this.state.supermarkets}
+                item_list = {this.state.item_list}
               />}
           />
           <Route
@@ -68,6 +91,8 @@ class App extends React.Component {
             component={(props) =>
               <SettingsPage 
                 {...props}
+                users = {this.state.users}
+                supermarkets = {this.state.supermarkets}
               />}
           />
           <Route
@@ -75,6 +100,9 @@ class App extends React.Component {
             component={(props) =>
               <AddItemPage 
                 {...props}
+                users = {this.state.users}
+                supermarkets = {this.state.supermarkets}
+                item_list = {this.state.item_list}
               />}
           />
         </Switch>

@@ -10,7 +10,7 @@ class ItemRow extends Component {
         return(
             <div className="shopping-item">
                 <h3 className="task-name">{this.props.item.product_name}</h3>
-                <p className="item-location">{this.props.item.aisle}</p>
+                <p className="item-location">Aisle {this.props.item.aisle}</p>
             </div>
         )
     }
