@@ -6,7 +6,7 @@ class ShoppingMap extends Component {
     componentDidMount() {
         const canvas = this.refs.shoppingMaps
         const ctx = canvas.getContext("2d")
-        const img = shoppingMap 
+        const img = this.refs.image 
 
         img.onload = () => {
             ctx.drawImage(img, 0, 0)   
@@ -16,9 +16,10 @@ class ShoppingMap extends Component {
     render() {
         return(
             <section  class="shopping-route">
-                <canvas ref="shoppingMaps" id="shopping-map" width="800" height="600">
+                <canvas ref="shoppingMaps" id="shopping-map" width="1000" height="400">
                     Your browser does not support the HTML5 canvas tag.
                 </canvas>
+                <img ref="image" src={shoppingMap} className="hidden" alt="shopping-map"/>
             </section>
         )
     }

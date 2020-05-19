@@ -7,7 +7,8 @@ class ShoppingListPage extends Component {
     static defaultProps = {
         users: [],
         supermarkets: [],
-        item_list: []
+        item_list: [],
+        
     }
 
     render() {

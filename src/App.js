@@ -29,6 +29,31 @@ class App extends React.Component {
     })
   }
 
+  addItem = (item) => {
+    const item_list = this.state.item_list
+    const id = item_list.length + 1
+    const code = "MEGA00" + id
+    const product_name = item
+    const aisle = 1
+    const supermarket_id = 1
+    const date_created = new Date()
+
+    const newItem = {
+      id: id,
+      code: code,
+      product_name: product_name,
+      aisle: aisle,
+      supermarket_id: supermarket_id,
+      date_created: date_created
+    }
+
+    item_list.push(newItem)
+    
+    this.setState({
+      item_list: item_list
+    })
+  }
+
 
 
   render() {
@@ -103,6 +128,7 @@ class App extends React.Component {
                 users = {this.state.users}
                 supermarkets = {this.state.supermarkets}
                 item_list = {this.state.item_list}
+                addItem = {this.addItem}
               />}
           />
         </Switch>
