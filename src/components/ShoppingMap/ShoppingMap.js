@@ -3,24 +3,58 @@ import shoppingMap from '../../media/shopping-map.png'
 import './ShoppingMap.css'
 
 class ShoppingMap extends Component {
-    componentDidMount() {
-        const canvas = this.refs.shoppingMaps
-        const ctx = canvas.getContext("2d")
-        const img = this.refs.image 
+    static defaultProps = {
+        personalList: []
+    }
 
-        img.onload = () => {
-            ctx.drawImage(img, 0, 0)   
+    state = {
+        aisles: []
+    }
+
+    componentDidMount() {
+
+        let aisles = []
+
+        for(let i = 0; i < this.props.personalList.length; i++) {
+            let mapped = aisles.find(aisle => parseInt(aisle.aisle) === parseInt(this.props.personalList[i].aisle))
+
+            if(mapped) {
+                mapped.items.push(this.props.personalList[i].product_name)
+            }  else {
+                let object = {
+                    aisle: this.props.personalList[i].aisle,
+                    items: [this.props.personalList[i].product_name]
+                }
+                aisles.push(object)
+            }
         }
+
+        this.setState({
+            aisles: aisles
+        })
     }
 
     render() {
+        
+
         return(
-            <section  class="shopping-route">
-                <canvas ref="shoppingMaps" id="shopping-map" width="1000" height="400">
-                    Your browser does not support the HTML5 canvas tag.
-                </canvas>
-                <img ref="image" src={shoppingMap} className="hidden" alt="shopping-map"/>
+            <div className="route">
+            <section  className="shopping-route">
+                <img ref="image" src={shoppingMap}  alt="shopping-map"/>
             </section>
+            <section className="instructions">
+                {!this.state.aisles ? "" :
+                    this.state.aisles.map((aisle, index) => 
+                        <section key={index}>
+                        <h3>Go to aisle {aisle.aisle} and pick:</h3>
+                        {aisle.items.map((item, index) => 
+                            <p key={index}>{item}</p>
+                        )}
+                        </section>
+                    )
+                }
+            </section>
+            </div>
         )
     }
 }

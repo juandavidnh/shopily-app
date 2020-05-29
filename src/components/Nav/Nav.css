@@ -1,0 +1,30 @@
+.mainNav {
+    background-color: lightgrey;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1% 60px;
+}
+
+
+.mainNavControl {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mainNavControl li {
+    list-style-type: none;
+    padding: 0 0px 0 15px;
+}
+
+.mainNav a {
+    text-decoration: none;
+}
+
+.mainNav .title {
+    color: black;
+    font-weight: 600;
+}

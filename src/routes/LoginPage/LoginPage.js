@@ -4,14 +4,15 @@ import './LoginPage.css'
 
 class LoginPage extends Component {
     static defaultProps = {
-        users: []
+        users: [],
+        login: () => {}
     }
 
     render() {
         return(
-            <section>
+            <section className="loginPage">
                 <h2>Log In</h2>
-                <LoginForm users = {this.props.users}/>
+                <LoginForm users={this.props.users} login={this.props.login}/>
             </section>
         )
     }

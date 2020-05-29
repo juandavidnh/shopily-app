@@ -18,10 +18,7 @@ class SignUpForm extends Component {
             value: "",
             touched: false
         },
-        nickname: {
-            value: "",
-            touched: false
-        },
+        
         password: {
             value: "",
             touched: false
@@ -33,7 +30,7 @@ class SignUpForm extends Component {
     }
 
     static defaultProps = {
-        signUpFunction: () => {},   
+        signUp: () => {},   
     }
 
     //group of functions that will update state as user fills in form
@@ -43,10 +40,6 @@ class SignUpForm extends Component {
 
     updateLastName(lastName){
         this.setState({ lastName: { value: lastName, touched: true } })
-    }
-
-    updateNickname(nickname){
-        this.setState({ nickname: { value: nickname, touched: true } })
     }
 
     updateEmail(email){
@@ -65,15 +58,21 @@ class SignUpForm extends Component {
     handleSubmit = ev => {
             ev.preventDefault()
 
-            const { email, password, repeatPassword, firstName, lastName, nickname } = this.state
+            const { email, password, firstName, lastName } = this.state
             const emailVal = email.value
             const passwordVal = password.value
-            const repeatPasswordVal = repeatPassword.value
             const firstNameVal = firstName.value
             const lastNameVal = lastName.value
-            const nicknameVal = nickname.value
+
+            const user = {
+                email: emailVal,
+                password: passwordVal,
+                first_name: firstNameVal,
+                last_name: lastNameVal
+            }
         
-            this.props.signUpFunction(emailVal, passwordVal, repeatPasswordVal, firstNameVal, lastNameVal, nicknameVal)
+            this.props.signUp(user)
+            this.props.history.push('/pick-supermarket')
     }
 
     //validation functions
@@ -134,7 +133,7 @@ class SignUpForm extends Component {
                 <div className="form-row">
                     <div>
                         <label htmlFor="firstName">First Name:*</label>
-                        <br /><input 
+                        <input 
                             type="text" 
                             name="firstName" 
                             id="first-name" 
@@ -144,7 +143,7 @@ class SignUpForm extends Component {
                     </div>
                     <div>
                         <label htmlFor="lastName">Last Name:*</label>
-                        <br /><input 
+                        <input 
                             type="text" 
                             name="lastName" 
                             id="last-name"
@@ -155,17 +154,8 @@ class SignUpForm extends Component {
                 </div>
                 <div className="form-row">
                     <div>
-                        <label htmlFor="nickname">Nickname:</label>
-                        <br /><input 
-                            type="text" 
-                            name="nickname" 
-                            id="nickname" 
-                            onChange={e => this.updateNickname(e.target.value)}/>
-                        <br /><br />
-                    </div>
-                    <div>
                         <label htmlFor="email">Email:*</label>
-                        <br /><input 
+                        <input 
                             type="email" 
                             name="email" 
                             id="email" 
@@ -177,7 +167,7 @@ class SignUpForm extends Component {
                 <div className="form-row">
                     <div>
                         <label htmlFor="password">Password:*</label>
-                        <br /><input 
+                        <input 
                             type="password" 
                             name="password" 
                             id="password"
@@ -187,7 +177,7 @@ class SignUpForm extends Component {
                     </div>
                     <div>
                         <label htmlFor="repeatPassword">Repeat password:*</label>
-                        <br /><input 
+                        <input 
                             type="password" 
                             name="repeatPassword" 
                             id="repeat-password" 

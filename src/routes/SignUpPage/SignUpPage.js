@@ -2,15 +2,19 @@ import React, { Component } from 'react'
 import SignUpForm from '../../components/SignUpForm/SignUpForm'
 import './SignUpPage.css'
 
-class LoginPage extends Component {
+class SignUpPage extends Component {
+    static defaultProps = {
+        signup: () => {}
+    }
+
     render() {
         return(
-            <section>
+            <section className="signUpPage">
                 <h2>Sign Up</h2>
-                <SignUpForm />
+                <SignUpForm signUp={this.props.signup} />
             </section>
         )
     }
 }
 
-export default LoginPage
+export default SignUpPage

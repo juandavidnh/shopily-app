@@ -1,3 +1,25 @@
+
+
+.shopping-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 10px 0 10px 0; 
+}
+
+.task-name {
+    flex-basis: 16%;
+}
+
+.item-location {
+    flex-basis: 7%;
+}
+
+.check-off{
+    flex-basis: 10%;
+}
+
 .hidden {
     display: none;
 }

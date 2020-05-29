@@ -5,7 +5,8 @@ import './ShoppingList.css'
 
 class ShoppingList extends Component {
     static defaultProps = {
-        items: []
+        items: [],
+        checkoff: () => {}
     }
 
     render() {
@@ -13,6 +14,8 @@ class ShoppingList extends Component {
             <ItemRow 
                 key={index} 
                 item={item}
+                item_id={index}
+                checkoff={this.props.checkoff}
             />
         )
 

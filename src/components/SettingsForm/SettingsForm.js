@@ -16,7 +16,7 @@ class SettingsForm extends Component {
                 <select id="city" name="city">
                     <option value="mega-6-diciembre">Megamaxi (6 de Diciembre)</option>
                 </select><br /><br />
-                <p className="button"><Link to="shopping-list.html">Next</Link></p>
+                <p className="button"><Link to="/shopping-list">Next</Link></p>
             </form>
         )
     }

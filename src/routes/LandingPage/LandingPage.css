@@ -1,0 +1,36 @@
+.banner {
+    padding: 7% 60px;
+    text-align: center;
+}
+
+.subBanner {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.subBanner div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subBanner div div {
+    flex-basis: 50%;
+}
+
+.subBanner img {
+    width: 100%;
+}
+
+.subBannerTitle {
+    text-align: center;
+    background-color: grey;
+    padding: 1% 60px;
+}
+
+.subBanner p {
+    margin: 0;
+    padding: 0 60px 0 20px;
+}

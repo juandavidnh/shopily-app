@@ -5,7 +5,7 @@ import './AddItemForm.css'
 class AddItemForm extends Component {
     static defaultProps = {
         addItem: () => {},
-        items: []
+        items: [],
     }
 
     handleSubmit = (e) => {

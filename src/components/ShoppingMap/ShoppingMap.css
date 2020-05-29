@@ -1,0 +1,11 @@
+.route {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10% 60px;
+}
+
+.shopping-route {
+    flex-basis: 50%;
+}

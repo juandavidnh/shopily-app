@@ -1,0 +1,21 @@
+.subNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: lightyellow;
+}
+
+.subNav ul {
+    display: flex;
+    flex-direction: row;
+}
+
+.subNav ul li {
+    list-style-type:  none;
+    margin: 0 10px 0 10px;
+}
+
+.bold {
+    font-weight: bolder;
+}

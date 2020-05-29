@@ -184,6 +184,84 @@ const STORE = {
             "supermarket_id": 1,
             "date_created": "2020-04-18T18:57:54.111Z"
         }
+    ],
+
+    "shopping_list": [{
+        "user_id": 1,
+        "supermarket_id": 1,
+        "list": [
+          {
+            "id": 9,
+            "code": "MEGA0009",
+            "product_name": "Beer",
+            "aisle": 8,
+            "supermarket_id": 1,
+            "date_created": "2020-04-18T18:57:54.111Z"
+        },
+        {
+            "id": 10,
+            "code": "MEGA0010",
+            "product_name": "Ice Cream",
+            "aisle": 1,
+            "supermarket_id": 1,
+            "date_created": "2020-04-18T18:57:54.111Z"
+        },
+        {
+            "id": 11,
+            "code": "MEGA0011",
+            "product_name": "Ground beef",
+            "aisle": 9,
+            "supermarket_id": 1,
+            "date_created": "2020-04-18T18:57:54.111Z"
+        },
+        {
+            "id": 12,
+            "code": "MEGA0012",
+            "product_name": "Chicken drums",
+            "aisle": 9,
+            "supermarket_id": 1,
+            "date_created": "2020-04-18T18:57:54.111Z"
+        },
+        ]
+      },
+      {
+        "user_id": 2,
+        "supermarket_id": 1,
+        "list": [
+          {
+            "id": 9,
+            "code": "MEGA0009",
+            "product_name": "Beer",
+            "aisle": 8,
+            "supermarket_id": 1,
+            "date_created": "2020-04-18T18:57:54.111Z"
+        },
+        {
+            "id": 10,
+            "code": "MEGA0010",
+            "product_name": "Ice Cream",
+            "aisle": 1,
+            "supermarket_id": 1,
+            "date_created": "2020-04-18T18:57:54.111Z"
+        },
+        {
+            "id": 11,
+            "code": "MEGA0011",
+            "product_name": "Ground beef",
+            "aisle": 9,
+            "supermarket_id": 1,
+            "date_created": "2020-04-18T18:57:54.111Z"
+        },
+        {
+            "id": 12,
+            "code": "MEGA0012",
+            "product_name": "Chicken drums",
+            "aisle": 9,
+            "supermarket_id": 1,
+            "date_created": "2020-04-18T18:57:54.111Z"
+        },
+        ]
+      }
     ]
 }
 

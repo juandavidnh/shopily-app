@@ -4,11 +4,14 @@ import { Link, withRouter } from 'react-router-dom'
 
 class LoginForm extends Component {
     static defaultProps = {
-        users: []
+        users: [],
+        login: () => {}
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
+
+        this.props.login()
 
         const {email, password} = e.target
 
@@ -19,7 +22,8 @@ class LoginForm extends Component {
             return
         }
 
-        window.sessionStorage.setItem('user_id', user.id)
+        window.sessionStorage.setItem('userId', user.id)
+        window.sessionStorage.setItem('supermarketId', user.supermarket_id)
         this.props.history.push('/shopping-list')
     }
 
