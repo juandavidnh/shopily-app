@@ -10,12 +10,16 @@ import ShoppingListPage from './routes/ShoppingListPage/ShoppingListPage'
 import ShoppingRoutePage from './routes/ShoppingRoutePage/ShoppingRoutePage'
 import SignUpPage from './routes/SignUpPage/SignUpPage'
 import SupermarketPage from './routes/SupermarketPage/SupermarketPage'
+import AuthApiService from './services/auth-api-service'
+import TokenService from './services/token-service'
+import { withRouter } from 'react-router'
 import STORE from './dummy-store'
 import './App.css'
 
 
 class App extends React.Component {
   state = {
+    userId: 0,
     supermarkets: [],
     users: [],
     item_list: [],
@@ -24,6 +28,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    
     this.setState({
       supermarkets: STORE.supermarkets,
       users: STORE.users,
@@ -91,10 +96,16 @@ class App extends React.Component {
 
   }
 
-  login = () => {
-    this.setState({
-      isLoggedIn: true
+  login = (email, password) => {
+    AuthApiService.postLoginUser({
+      email: email,
+      password: password
     })
+      .then(res => {
+        TokenService.saveAuthToken(res.authToken)
+        this.props.history.push('/shopping-list')
+      })
+      .catch(res => alert(res.error))
   }
 
   addItem = (item) => {
@@ -240,4 +251,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);

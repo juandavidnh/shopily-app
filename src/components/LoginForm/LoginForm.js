@@ -11,20 +11,9 @@ class LoginForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
 
-        this.props.login()
-
         const {email, password} = e.target
 
-        const user = this.props.users.find(user => user.email === email.value)
-
-        if(!user || !user.password || user.password !== password.value) {
-            alert('Incorrect email or password')
-            return
-        }
-
-        window.sessionStorage.setItem('userId', user.id)
-        window.sessionStorage.setItem('supermarketId', user.supermarket_id)
-        this.props.history.push('/shopping-list')
+        this.props.login(email.value, password.value)
     }
 
     render() {
@@ -37,7 +26,7 @@ class LoginForm extends Component {
                 <input type="email" name="email" id="email" /><br />
                 <label htmlFor="password">Password:</label>
                 <input type="password" name="password" id="password" autoComplete="on" /><br />
-                <button className="loginutton" type="submit">Submit</button>
+                <button className="loginbutton" type="submit">Submit</button>
                 <p><Link to="/signup">I don't have an account yet</Link></p>
             </form>
         )

@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import AddItemForm from '../../components/AddItemForm/AddItemForm'
+import ShoppingListApiService from '../../services/shopping-list-service'
+import UserApiService from '../../services/user-api-service'
+import ItemsApiService from '../../services/items-api-service'
 import './AddItemPage.css'
 
 class AddItemPage extends Component {
@@ -11,11 +14,43 @@ class AddItemPage extends Component {
         addItem: () => {}
     }
 
+    state = {
+        shopping_list: [],
+        item_list: [],
+        supermarket_id: 0,
+        user_id: 0
+    }
+
+    componentDidMount() {
+        UserApiService.getOwnUser()
+            .then(user => {
+                const supermarketId = user.supermarket_id
+                const userId = user.id
+                console.log(userId)
+
+                ShoppingListApiService.getItems(user.id)
+                    .then(items => {
+                        this.setState({
+                            shopping_list: items,
+                            supermarket_id: supermarketId,
+                            user_id: userId
+                        })
+                    })
+            })
+            .catch(res => alert(res.error))
+
+        ItemsApiService.getItems()
+            .then(items => {
+                this.setState({
+                    item_list: items
+                })
+            })
+            .catch(res => alert(res.error))
+    }
+
     render() {
-        const userId = window.sessionStorage.getItem('userId')
-        const user = this.props.users.find(user => parseInt(user.id) === parseInt(userId))
-        const shoppingList = this.props.shopping_list.find(list => parseInt(list.user_id) === parseInt(user.id) && parseInt(list.supermarket_id) === parseInt(user.supermarket_id))
-        const shoppingItems = shoppingList.list
+        const filteredItemList = this.state.item_list.filter(item => parseInt(item.supermarket_id) === parseInt(this.state.supermarket_id))
+        const shoppingItems = this.state.shopping_list
 
         let shoppingItemCode = []
         let filteredItems = []
@@ -24,9 +59,9 @@ class AddItemPage extends Component {
             shoppingItemCode.push(shoppingItems[i].code)
         }
 
-        for(let i = 0; i < this.props.item_list.length; i++){
-            if(!shoppingItemCode.includes(this.props.item_list[i].code)){
-                filteredItems.push(this.props.item_list[i])
+        for(let i = 0; i < filteredItemList.length; i++){
+            if(!shoppingItemCode.includes(filteredItemList[i].code)){
+                filteredItems.push(filteredItemList[i])
             } else {
                 continue
             }
@@ -35,7 +70,7 @@ class AddItemPage extends Component {
         return(
             <section>
                 <h2>Add Item</h2>
-                <AddItemForm items={filteredItems} addItem={this.props.addItem}/>
+                <AddItemForm items={filteredItems} userId={this.state.user_id}/>
             </section>
         )
     }

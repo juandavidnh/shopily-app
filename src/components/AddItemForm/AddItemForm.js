@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ShoppingListApiService from '../../services/shopping-list-service'
 import { withRouter } from 'react-router-dom'
 import './AddItemForm.css'
 
@@ -6,15 +7,20 @@ class AddItemForm extends Component {
     static defaultProps = {
         addItem: () => {},
         items: [],
+        userId: 0,
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
 
         let { shopping_item } = e.target
+        const itemId = shopping_item.value
 
-        this.props.addItem(shopping_item.value)
-        this.props.history.push('/shopping-list')
+        ShoppingListApiService.addItem(this.props.userId, itemId)
+            .then(res => {
+                this.props.history.push('/shopping-list')
+            })
+            .catch(res => alert(res.error))        
     }
 
     render() {
@@ -27,7 +33,8 @@ class AddItemForm extends Component {
                 <select id="shopping_item" name="shopping_item">
                     {this.props.items.map((item) =>
                         <option 
-                            key={item.id} 
+                            key={item.id}
+                            value={item.id} 
                         >{item.product_name}</option>)}
                 </select>
                 <button className="add-item-button" type="submit">Submit</button>

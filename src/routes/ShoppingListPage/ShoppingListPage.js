@@ -3,6 +3,8 @@ import ShoppingList from '../../components/ShoppingList/ShoppingList'
 import SubNav from '../../components/SubNav/SubNav'
 import ErrorBoundary from '../../errorHandling/ErrorBoundary'
 import AddItemButton from '../../components/ShoppingList/AddItemButton/AddItemButton'
+import ShoppingListApiService from '../../services/shopping-list-service'
+import UserApiService from '../../services/user-api-service'
 import './ShoppingListPage.css'
 
 class ShoppingListPage extends Component {
@@ -11,7 +13,6 @@ class ShoppingListPage extends Component {
         supermarkets: [],
         item_list: [],
         shopping_list: [],
-        checkoff: () => {}
     }
 
     state = {
@@ -19,25 +20,35 @@ class ShoppingListPage extends Component {
     }
 
     componentDidMount() {
-        let userId = window.sessionStorage.getItem('userId')
-        let supermarketId = window.sessionStorage.getItem('supermarketId')
-        let user = this.props.users.find(user => parseInt(user.id) === parseInt(userId))
-        let supermarket = this.props.supermarkets.find(supermarket => parseInt(supermarket.id) === parseInt(supermarketId))
-        let shoppingList = this.props.shopping_list.find(list => parseInt(list.user_id) === parseInt(user.id) && parseInt(list.supermarket_id) === parseInt(supermarket.id) )
-        let items = shoppingList.list
-        if(items !== undefined || items.length > 0){
-            items.sort(function(a, b) {
-                return a.aisle - b.aisle
+        UserApiService.getOwnUser()
+            .then(user => {
+                ShoppingListApiService.getItems(user.id)
+                    .then(items => {
+                        this.setState({
+                            items: items
+                        })
+                    })
             })
-        }
-        
-        if(items !== undefined){
-            this.setState({
-                items: items
-            })
-        }
-        
+            .catch(res => alert(res.error))
     }
+
+    checkOff = (userId, itemId) => {
+        const itemsArray = this.state.items
+        console.log(itemsArray)
+        const selectItem = itemsArray.find(item => parseInt(item.id) === parseInt(itemId))
+        const indexOfItem = itemsArray.indexOf(selectItem)
+
+        itemsArray.splice(indexOfItem, 1)
+
+        this.setState({
+            items: itemsArray
+        })
+
+        ShoppingListApiService.deleteItem(userId, itemId)
+            .catch(res => alert(res.error))
+    }
+
+    addItem
 
     render() {
         return(
@@ -50,7 +61,7 @@ class ShoppingListPage extends Component {
                             <h3 className="addFirstItem">Congratulations! Now, add your first item</h3> 
                             <AddItemButton /> 
                         </> 
-                        : <ShoppingList items={this.state.items} checkoff={this.props.checkoff}/>      
+                        : <ShoppingList items={this.state.items} checkoff={this.checkOff}/>      
                     }
                     
                 </ErrorBoundary>
