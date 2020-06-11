@@ -17,7 +17,8 @@ class AddItemForm extends Component {
         const itemId = shopping_item.value
 
         ShoppingListApiService.addItem(this.props.userId, itemId)
-            .then(res => {
+            .then(item => {
+                this.props.addItem(item)
                 this.props.history.push('/shopping-list')
             })
             .catch(res => alert(res.error))        

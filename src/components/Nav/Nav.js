@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import TokenService from '../../services/token-service'
 import './Nav.css'
 
 class Nav extends Component {
-    static defaultProps = {
-        isLoggedIn: false
-    }
 
     renderLogoutLink() {
         return(
@@ -30,7 +28,7 @@ class Nav extends Component {
             <header className = "mainNav">
                 <Link className = "title" to='/'>Shopily</Link>
                 <nav>
-                    {this.props.isLoggedIn
+                    {TokenService.hasAuthToken()
                         ? this.renderLogoutLink()
                         : this.renderLoginLink()
                     }

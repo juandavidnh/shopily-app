@@ -1,56 +1,20 @@
 import React, { Component } from 'react'
 import AddItemForm from '../../components/AddItemForm/AddItemForm'
-import ShoppingListApiService from '../../services/shopping-list-service'
-import UserApiService from '../../services/user-api-service'
-import ItemsApiService from '../../services/items-api-service'
 import './AddItemPage.css'
 
 class AddItemPage extends Component {
     static defaultProps = {
-        users: [],
+        supermarket_id: 0,
+        user_id: 0,
         item_list: [],
         shopping_list: [],
-        supermarkets: [],
         addItem: () => {}
     }
 
-    state = {
-        shopping_list: [],
-        item_list: [],
-        supermarket_id: 0,
-        user_id: 0
-    }
-
-    componentDidMount() {
-        UserApiService.getOwnUser()
-            .then(user => {
-                const supermarketId = user.supermarket_id
-                const userId = user.id
-                console.log(userId)
-
-                ShoppingListApiService.getItems(user.id)
-                    .then(items => {
-                        this.setState({
-                            shopping_list: items,
-                            supermarket_id: supermarketId,
-                            user_id: userId
-                        })
-                    })
-            })
-            .catch(res => alert(res.error))
-
-        ItemsApiService.getItems()
-            .then(items => {
-                this.setState({
-                    item_list: items
-                })
-            })
-            .catch(res => alert(res.error))
-    }
-
     render() {
-        const filteredItemList = this.state.item_list.filter(item => parseInt(item.supermarket_id) === parseInt(this.state.supermarket_id))
-        const shoppingItems = this.state.shopping_list
+        const filteredItemList = this.props.item_list.filter(item => parseInt(item.supermarket_id) === parseInt(this.props.supermarket_id))
+        console.log(filteredItemList)
+        const shoppingItems = this.props.shopping_list
 
         let shoppingItemCode = []
         let filteredItems = []
@@ -70,7 +34,7 @@ class AddItemPage extends Component {
         return(
             <section>
                 <h2>Add Item</h2>
-                <AddItemForm items={filteredItems} userId={this.state.user_id}/>
+                <AddItemForm items={filteredItems} userId={this.props.user_id} addItem={this.props.addItem}/>
             </section>
         )
     }

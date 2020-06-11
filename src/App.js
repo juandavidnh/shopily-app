@@ -12,30 +12,61 @@ import SignUpPage from './routes/SignUpPage/SignUpPage'
 import SupermarketPage from './routes/SupermarketPage/SupermarketPage'
 import AuthApiService from './services/auth-api-service'
 import TokenService from './services/token-service'
+import UserApiService from './services/user-api-service'
+import ShoppingListApiService from './services/shopping-list-service'
+import ItemsApiService from './services/items-api-service'
 import { withRouter } from 'react-router'
-import STORE from './dummy-store'
 import './App.css'
 
 
 class App extends React.Component {
   state = {
-    userId: 0,
-    supermarkets: [],
-    users: [],
+    supermarket_id: 0,
+    user_id: 0,
     item_list: [],
     shopping_list: [],
+    supermarkets: [],
     isLoggedIn: false,
   }
 
   componentDidMount() {
-    
-    this.setState({
-      supermarkets: STORE.supermarkets,
-      users: STORE.users,
-      item_list: STORE.item_list,
-      shopping_list: STORE.shopping_list
-    })                
+    const hasToken = TokenService.getAuthToken()
+
+    if(hasToken) {
+      UserApiService.getOwnUser()
+        .then(user => {
+          const supermarketId = user.supermarket_id
+          const userId = user.id
+
+          ShoppingListApiService.getItems(user.id)
+            .then(items => {
+              this.setState({
+                shopping_list: items,
+                user_id: userId,
+                supermarket_id: supermarketId
+              })
+            })
+        })
+        .catch(res => alert(res.error))
+
+      ItemsApiService.getItems()
+        .then(items => {
+            this.setState({
+                item_list: items
+            })
+        })
+        .catch(res => alert(res.error))
+
+      ShoppingListApiService.getAllSupermarkets()
+        .then(supermarkets => {
+          this.setState({
+            supermarkets
+          })
+        })
+        .catch(res => alert(res.error))
+      }
   }
+
 
   signUp = (user) => {
     const users = this.state.users
@@ -62,38 +93,16 @@ class App extends React.Component {
   }
 
   pickSupermarket = (city, supermarket_id) => {  
-    let userId = window.sessionStorage.getItem("userId")
-    const usersArray = this.state.users
-    const user = usersArray.find(user => parseInt(user.id) === parseInt(userId))
-    const userIndex = usersArray.indexOf(user)
-
-    const updatedUser = {
-      id: user.id,
-      email: user.email,
-      password: user.password,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      city: city,
-      supermarket_id: supermarket_id,
-      date_created: user.date_created
-    }
-
-    usersArray.splice(userIndex, 1, updatedUser)
-
-    const shoppingList = this.state.shopping_list
-    shoppingList.push({
-      user_id: userId,
-      supermarket_id: supermarket_id,
-      list: []
-    })
-
-    window.sessionStorage.setItem("supermarketId", supermarket_id)
-
     this.setState({
-      users: usersArray,
-      shopping_list: shoppingList
+      supermarket_id: supermarket_id
     })
 
+    UserApiService.updateUser({
+      supermarket_id,
+      city
+    })
+      .then(() => this.props.history.push('/shopping-list'))
+      .catch(res => alert(res.error))
   }
 
   login = (email, password) => {
@@ -103,62 +112,60 @@ class App extends React.Component {
     })
       .then(res => {
         TokenService.saveAuthToken(res.authToken)
-        this.props.history.push('/shopping-list')
+
+        return UserApiService.getOwnUser()
+            .then(user => {
+              const supermarketId = user.supermarket_id
+              const userId = user.id
+              console.log(userId)
+              
+              ShoppingListApiService.getItems(user.id)
+                .then(items => {
+                  this.setState({
+                    shopping_list: items,
+                    supermarket_id: supermarketId,
+                    user_id: userId
+                  })
+
+                  this.props.history.push('/shopping-list')
+                })
+            })
+            .catch(res => alert(res.error))
+
       })
       .catch(res => alert(res.error))
   }
 
+  checkoff = (userId, itemId) => {
+    const itemsArray = this.state.shopping_list
+    console.log(itemsArray)
+    const selectItem = itemsArray.find(item => parseInt(item.id) === parseInt(itemId))
+    const indexOfItem = itemsArray.indexOf(selectItem)
+
+    itemsArray.splice(indexOfItem, 1)
+
+    this.setState({
+        shopping_list: itemsArray
+    })
+
+    ShoppingListApiService.deleteItem(userId, itemId)
+        .catch(res => alert(res.error))
+  }
+
   addItem = (item) => {
-    const itemDetailed = this.state.item_list.find(i => i.product_name === item)
-    const userId = window.sessionStorage.getItem("userId")
+    const list = this.state.shopping_list
 
-    const shoppingListArr = this.state.shopping_list
-    const listDetailed = shoppingListArr.find(list => parseInt(list.user_id) === parseInt(userId))
-    const listIndex = shoppingListArr.indexOf(listDetailed)
-    const list = listDetailed.list
-
-    itemDetailed.date_created = new Date()
-
-    list.push(itemDetailed)
-
-    listDetailed.list = list
-
-    shoppingListArr.splice(listIndex, 1, listDetailed)
+    list.push(item)
     
     this.setState({
-      shopping_list: shoppingListArr
+      shopping_list: list
     })
   }
-
-  checkoff = (item) => {
-    const shoppingListArr = this.state.shopping_list
-    const userId = window.sessionStorage.getItem("userId")
-
-    const shoppingList = this.state.shopping_list.find(list => parseInt(list.user_id) === parseInt(userId))
-
-    const shoppingListIndex = shoppingListArr.indexOf(shoppingList)
-
-    const itemDetailed = shoppingList.list.find(i => i.product_name === item)
-    
-
-    const itemIndex = shoppingList.list.indexOf(itemDetailed)
-
-    shoppingList.list.splice(itemIndex, 1)
-
-    shoppingListArr.splice(shoppingListIndex, 1, shoppingList)
-
-    this.setState({
-      shopping_list: shoppingListArr
-    })
-
-
-  }
-
 
   render() {
     return(
     <div className="App">
-      <Nav isLoggedIn={this.state.isLoggedIn}/>
+      <Nav />
       
       <main className="App_main">
         <Switch>
@@ -198,7 +205,7 @@ class App extends React.Component {
                 pickSupermarket = {this.pickSupermarket}
               />}
           />
-          {(this.state.supermarkets.length > 0 && this.state.users.length > 0 && this.state.shopping_list.length > 0 && this.state.item_list.length > 0) ?
+          {(this.state.shopping_list.length > 0) ?
           <Route
             path={'/shopping-list'}
             component={(props) =>
@@ -236,10 +243,10 @@ class App extends React.Component {
             component={(props) =>
               <AddItemPage 
                 {...props}
-                users = {this.state.users}
-                supermarkets = {this.state.supermarkets}
+                user_id = {this.state.user_id}
                 item_list = {this.state.item_list}
                 shopping_list = {this.state.shopping_list}
+                supermarket_id = {this.state.supermarket_id}
                 addItem = {this.addItem}
               />}
           />
