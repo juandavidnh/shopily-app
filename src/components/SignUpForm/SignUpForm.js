@@ -63,16 +63,8 @@ class SignUpForm extends Component {
             const passwordVal = password.value
             const firstNameVal = firstName.value
             const lastNameVal = lastName.value
-
-            const user = {
-                email: emailVal,
-                password: passwordVal,
-                first_name: firstNameVal,
-                last_name: lastNameVal
-            }
-        
-            this.props.signUp(user)
-            this.props.history.push('/pick-supermarket')
+          
+            this.props.signUp(firstNameVal, lastNameVal, emailVal, passwordVal)
     }
 
     //validation functions

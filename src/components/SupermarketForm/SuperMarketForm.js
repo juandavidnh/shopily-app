@@ -35,13 +35,9 @@ class SuperMarketForm extends Component {
         const supermarketArrF = this.props.supermarkets.find(supermarketF => supermarketF.supermarket_name === supermarket)
         const supermarketId = supermarketArrF.id
 
-        window.sessionStorage.setItem("supermarketId", supermarketId)
-
         this.props.pickSupermarket(city, supermarketId)
         this.props.history.push('/shopping-list')
     }
-
-    
 
     render() {
 

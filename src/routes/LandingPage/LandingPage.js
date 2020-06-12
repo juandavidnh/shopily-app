@@ -1,19 +1,17 @@
 import React, { Component } from 'react'
 import SubNav from '../../components/SubNav/SubNav'
+import TokenService from '../../services/token-service'
 import './LandingPage.css'
 import womanShopping from '../../media/woman-in-yellow-tshirt-and-beige-jacket-holding-a-fruit-3962285.jpg'
 import coupleShopping from '../../media/couple-with-a-shopping-cart-buying-groceries-4199286.jpg'
 
 
 class LandingPage extends Component {
-    static defaultProps = {
-        isLoggedIn: false
-    }
 
     render() {
         return(
             <>
-            {this.props.isLoggedIn && <SubNav />}
+            {TokenService.hasAuthToken() && <SubNav />}
             <main>
                 <header className="banner" role="banner">
                     <h2>Forget about long and confusing shopping trips</h2>

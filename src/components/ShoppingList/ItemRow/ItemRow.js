@@ -26,7 +26,6 @@ class ItemRow extends Component {
         e.preventDefault()
         
         this.props.checkoff(this.state.user.id, this.props.item.id)
-            
     }
 
     render() {

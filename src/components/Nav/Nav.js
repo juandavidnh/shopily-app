@@ -4,12 +4,20 @@ import TokenService from '../../services/token-service'
 import './Nav.css'
 
 class Nav extends Component {
+    static defaultProps = {
+        logout: () => {}
+    }
+
+    logout = () => {
+        this.props.logout()
+        TokenService.clearAuthToken()
+    }
 
     renderLogoutLink() {
         return(
             <ul className="mainNavControl">
                 <li className="nav-item"><Link to='/settings'>Settings</Link></li>
-                <li className="nav-item"><Link to='/'>Log Out</Link></li>
+                <li className="nav-item"><Link onClick={this.logout} to='/'>Log Out</Link></li>
             </ul>
         )
     }

@@ -26,10 +26,17 @@ class App extends React.Component {
     item_list: [],
     shopping_list: [],
     supermarkets: [],
-    isLoggedIn: false,
   }
 
   componentDidMount() {
+    ShoppingListApiService.getAllSupermarkets()
+        .then(supermarkets => {
+          this.setState({
+            supermarkets: supermarkets
+          })
+        })
+        .catch(res => alert(res.error))
+
     const hasToken = TokenService.getAuthToken()
 
     if(hasToken) {
@@ -55,41 +62,38 @@ class App extends React.Component {
                 item_list: items
             })
         })
-        .catch(res => alert(res.error))
-
-      ShoppingListApiService.getAllSupermarkets()
-        .then(supermarkets => {
-          this.setState({
-            supermarkets
-          })
-        })
-        .catch(res => alert(res.error))
+        .catch(res => alert(res.error))      
       }
   }
 
 
-  signUp = (user) => {
-    const users = this.state.users
-    const id = users.length + 1
-    const date_created = new Date()
+  signUp = (first_name, last_name, email, password) => {
+    AuthApiService.postUser({
+        first_name,
+        last_name,
+        email,
+        password
+      })
+        .then(res => {
+          TokenService.saveAuthToken(res.authToken)
 
-    const newUser = {
-      id: id,
-      email: user.email,
-      password: user.password,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      date_created: date_created
-    }
+          return UserApiService.getOwnUser()
+            .then(user => {
+              const userId = user.id
 
-    users.push(newUser)
+              ItemsApiService.getItems()
+                .then(items => {
+                  this.setState({
+                    item_list: items,
+                    user_id: userId
+                  })
+              })
 
-    window.sessionStorage.setItem("userId", id)
-
-    this.setState({
-      users: users,
-      isLoggedIn: true
-    })
+              this.props.history.push('/pick-supermarket')
+            })
+          
+        })
+        .catch(res => alert(res.error))
   }
 
   pickSupermarket = (city, supermarket_id) => {  
@@ -98,8 +102,8 @@ class App extends React.Component {
     })
 
     UserApiService.updateUser({
-      supermarket_id,
-      city
+      supermarket_id: supermarket_id,
+      city: city
     })
       .then(() => this.props.history.push('/shopping-list'))
       .catch(res => alert(res.error))
@@ -120,20 +124,32 @@ class App extends React.Component {
               console.log(userId)
               
               ShoppingListApiService.getItems(user.id)
-                .then(items => {
-                  this.setState({
-                    shopping_list: items,
-                    supermarket_id: supermarketId,
-                    user_id: userId
-                  })
+                .then(shoppingItems => {
 
-                  this.props.history.push('/shopping-list')
+                  ItemsApiService.getItems()
+                    .then(items => {
+                      this.setState({
+                        item_list: items,
+                        shopping_list: shoppingItems,
+                        supermarket_id: supermarketId,
+                        user_id: userId
+                      })
+
+                      this.props.history.push('/shopping-list')
+                    })
                 })
             })
-            .catch(res => alert(res.error))
-
       })
       .catch(res => alert(res.error))
+  }
+
+  logout = () => {
+    this.setState({
+      supermarket_id: 0,
+      user_id: 0,
+      item_list: [],
+      shopping_list: [],
+    })
   }
 
   checkoff = (userId, itemId) => {
@@ -162,10 +178,11 @@ class App extends React.Component {
     })
   }
 
+
   render() {
     return(
     <div className="App">
-      <Nav />
+      <Nav logout={this.logout}/>
       
       <main className="App_main">
         <Switch>
@@ -205,7 +222,7 @@ class App extends React.Component {
                 pickSupermarket = {this.pickSupermarket}
               />}
           />
-          {(this.state.shopping_list.length > 0) ?
+          {(this.state.shopping_list.length >= 0) ?
           <Route
             path={'/shopping-list'}
             component={(props) =>
@@ -234,8 +251,8 @@ class App extends React.Component {
             component={(props) =>
               <SettingsPage 
                 {...props}
-                users = {this.state.users}
                 supermarkets = {this.state.supermarkets}
+                pickSupermarket = {this.pickSupermarket}
               />}
           />
           <Route
