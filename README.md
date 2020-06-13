@@ -1,4 +1,39 @@
+# Shopily
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Summary
+
+Shopily is a web app that allows users to input their shopping list and arranges all shopping list items so as to provide the most efficient shopping route.
+
+## Demo
+
+In order to test a demo account, use the following log in credentials:
+**Email:** jd@choretastic.com
+**Password:** jd-password
+
+### Instuctions
+
+1. Access [https://shopily-app.now.sh/](https://shopily-app.now.sh/)
+2. In the landing page, click 'Sign In.'
+![Image of landing page](/src/media/screenshots/landing-page.png)
+![Image of landing page sign in](/src/media/screenshots/landing-page-sign-in.png)
+3. Enter the demo credentials.
+![Image of login](/src/media/screenshots/log-in.png)
+4. You'll land on the shopping list page, which will display a demo shopping list. In order to check off an item click over the corresponding check mark.
+![Image of shopping list](/src/media/screenshots/shopping-list.png)
+![Image of shopping list check](/src/media/screenshots/shopping-list-check.png)
+5. In order to add an item, click 'Add.' Pick an item from the dropdown list and click 'Submit.'
+![Image of add button](/src/media/screenshots/add-button.png)
+![Image of add task](/src/media/screenshots/add-item.png)
+6. In order to see the suggested shopping route click on 'Route.' You'll see a screen with your items grouped by their location within the supermarket, arranging the items closest to the entrance first and those closest to the checkout last.
+![Image of scoreboard](/src/media/screenshots/shopping-map.png)
+7. In order to switch supermarkets, go to 'Settings' and pick a different supermarket.
+![Image of settings page](/src/media/screenshots/switch-supermarket.png)
+
+## Live App
+
+Find a live version of Shopily at: [https://shopily-app.now.sh/](https://choretastic.now.sh/)
 
 ## Available Scripts
 
@@ -37,6 +72,11 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+## Technologies Used
+
+**Frontend:** React, CSS 
+**Backend:** Node, Express, PostgreSQL
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
@@ -66,3 +106,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+# choretastic-app
