@@ -3,19 +3,29 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: lightyellow;
+    background-color: #f5b01b;
 }
 
 .subNav ul {
     display: flex;
     flex-direction: row;
+    padding-left: 0;
 }
 
 .subNav ul li {
     list-style-type:  none;
     margin: 0 10px 0 10px;
+    font-style: 'LeagueSpartan', sans-serif;
+}
+
+.subNav ul li a {
+    font-family: 'LeagueSpartan', sans-serif;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
 }
 
 .bold {
     font-weight: bolder;
 }
+

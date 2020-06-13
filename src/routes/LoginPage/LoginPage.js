@@ -11,7 +11,7 @@ class LoginPage extends Component {
     render() {
         return(
             <section className="loginPage">
-                <h2>Log In</h2>
+                <h2 className="loginTitle">Log In</h2>
                 <LoginForm users={this.props.users} login={this.props.login}/>
             </section>
         )

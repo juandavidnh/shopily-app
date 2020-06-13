@@ -22,12 +22,16 @@ class LoginForm extends Component {
                 className="loginForm"
                 onSubmit={this.handleSubmit}
             >
-                <label htmlFor="email">Email: </label>
-                <input type="email" name="email" id="email" /><br />
-                <label htmlFor="password">Password:</label>
-                <input type="password" name="password" id="password" autoComplete="on" /><br />
+                <div className="inputField">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" name="email" id="email" /><br />
+                </div>
+                <div className="inputField">
+                    <label htmlFor="password">Password</label>
+                    <input type="password" name="password" id="password" autoComplete="on" /><br />
+                </div>
                 <button className="loginbutton" type="submit">Submit</button>
-                <p><Link to="/signup">I don't have an account yet</Link></p>
+                <p><Link className="dontHaveAccount" to="/signup">I don't have an account yet</Link></p>
             </form>
         )
     }

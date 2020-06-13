@@ -15,9 +15,9 @@ class Footer extends Component {
                 </div>
                 <div className="portfolio-links">
                     <ul>
-                        <li><a href="https://juandavidnh.github.io/my-portfolio/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faAddressCard}/> Portfolio</a></li>
-                        <li><a href="https://github.com/juandavidnh" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub}/> GitHub</a></li>
-                        <li><a href="https://www.linkedin.com/in/juandavidnh/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedin}/> LinkedIn</a></li>
+                        <li><a href="https://juandavidnh.github.io/my-portfolio/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faAddressCard}/> <span className="hidden"> Portfolio</span></a></li>
+                        <li><a href="https://github.com/juandavidnh" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub}/> <span className="hidden"> GitHub</span></a></li>
+                        <li><a href="https://www.linkedin.com/in/juandavidnh/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faLinkedin}/> <span className="hidden"> LinkedIn</span></a></li>
                     </ul>
                 </div>
             </footer>

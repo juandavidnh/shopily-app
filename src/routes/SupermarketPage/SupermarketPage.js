@@ -11,7 +11,7 @@ class SupermarketPage extends Component {
     render() {
         return(
             <section className="superMarketPage">
-                <h2>Pick your favorite supermarket:</h2>
+                <h2 className="superMarketTitle">Pick your favorite supermarket:</h2>
                 <SupermarketForm supermarkets={this.props.supermarkets} pickSupermarket={this.props.pickSupermarket}/>
             </section>
         )

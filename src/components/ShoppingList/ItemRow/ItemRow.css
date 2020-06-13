@@ -3,17 +3,17 @@
 .shopping-item {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     margin: 10px 0 10px 0; 
 }
 
 .task-name {
-    flex-basis: 16%;
+    flex-basis: 60%;
 }
 
 .item-location {
-    flex-basis: 7%;
+    flex-basis: 30%;
 }
 
 .check-off{
@@ -26,4 +26,22 @@
 
 .complete {
     text-decoration: line-through;
+}
+
+.check-off {
+    display: inline-block;
+    border: none;
+    margin: 0 auto;
+    text-decoration: none;
+    background: #4d4d5f;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-radius: 4px;
+    font-family: 'LeagueSpartan', sans-serif;
+    height: 20px;
 }

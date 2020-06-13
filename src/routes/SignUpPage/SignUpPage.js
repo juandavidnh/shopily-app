@@ -10,7 +10,7 @@ class SignUpPage extends Component {
     render() {
         return(
             <section className="signUpPage">
-                <h2>Sign Up</h2>
+                <h2 className="signUpTitle">Sign Up</h2>
                 <SignUpForm signUp={this.props.signup} />
             </section>
         )

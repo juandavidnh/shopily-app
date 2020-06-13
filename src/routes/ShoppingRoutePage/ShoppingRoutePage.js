@@ -11,7 +11,7 @@ class ShoppingRoutePage extends Component {
 
     render() {
         return(
-            <section>
+            <section className="shoppingRoutePage">
                 <SubNav />
                 <ShoppingMap personalList = {this.props.shopping_list.sort((a, b) => a.aisle - b.aisle)} />
             </section>

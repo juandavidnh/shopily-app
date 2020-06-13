@@ -122,68 +122,61 @@ class SignUpForm extends Component {
                 onSubmit = {this.handleSubmit}
                 className = "signUpForm"
             >
-                <div className="form-row">
-                    <div>
-                        <label htmlFor="firstName">First Name:*</label>
+                    <div className="inputField">
+                        <label htmlFor="firstName">First Name*</label>
                         <input 
                             type="text" 
                             name="firstName" 
                             id="first-name" 
                             onChange={e => this.updateFirstName(e.target.value)}
                             required />
-                        <br />{this.state.firstName.touched && <ValidationError message={firstNameError}/>}<br />
                     </div>
-                    <div>
-                        <label htmlFor="lastName">Last Name:*</label>
+                    {this.state.firstName.touched && <ValidationError message={firstNameError}/>}
+                    <div className="inputField">
+                        <label htmlFor="lastName">Last Name*</label>
                         <input 
                             type="text" 
                             name="lastName" 
                             id="last-name"
                             onChange={e => this.updateLastName(e.target.value)}
                             required />
-                        <br />{this.state.lastName.touched && <ValidationError message={lastNameError}/>}<br />
                     </div>
-                </div>
-                <div className="form-row">
-                    <div>
-                        <label htmlFor="email">Email:*</label>
+                    {this.state.lastName.touched && <ValidationError message={lastNameError}/>}
+                    <div className="inputField">
+                        <label htmlFor="email">Email*</label>
                         <input 
                             type="email" 
                             name="email" 
                             id="email" 
                             onChange={e => this.updateEmail(e.target.value)}
                             required />
-                        <br />{this.state.email.touched && <ValidationError message={emailError}/>}<br />
                     </div>
-                </div>
-                <div className="form-row">
-                    <div>
-                        <label htmlFor="password">Password:*</label>
+                    {this.state.email.touched && <ValidationError message={emailError}/>}
+                    <div className="inputField">
+                        <label htmlFor="password">Password*</label>
                         <input 
                             type="password" 
                             name="password" 
                             id="password"
                             onChange={e => this.updatePassword(e.target.value)} 
                             required />
-                        <br />{this.state.password.touched && <ValidationError message={passwordError}/>}<br />
                     </div>
-                    <div>
-                        <label htmlFor="repeatPassword">Repeat password:*</label>
+                    {this.state.password.touched && <ValidationError message={passwordError}/>}
+                    <div className="inputField">
+                        <label htmlFor="repeatPassword">Repeat password*</label>
                         <input 
                             type="password" 
                             name="repeatPassword" 
                             id="repeat-password" 
                             onChange={e => this.updateRepeatPassword(e.target.value)} 
                             required />
-                        <br />{this.state.repeatPassword.touched && <ValidationError message={repeatPasswordError}/>}<br />
                     </div>
-                </div>
-                
+                    {this.state.repeatPassword.touched && <ValidationError message={repeatPasswordError}/>}
                 <button 
                     type="submit"
                     disabled={this.validateFirstName() || this.validateLastName() || this.validatePassword() || this.validateEmail() || this.validateRepeatPassword()}
                 >Next</button>
-                <p><Link to="/login">I have an account already</Link></p>
+                <p><Link className="haveAccount" to="/login">I have an account already</Link></p>
             </form>
         )
     }

@@ -1,23 +1,28 @@
 .banner {
-    padding: 7% 60px;
+    padding: 7% 30px;
     text-align: center;
+}
+
+.banner h2 {
+    font-weight: 400;
+    line-height: 34px;
+}
+
+.banner h3 {
+    font-weight: 300;
+    font-size: 15px;
 }
 
 .subBanner {
     display: flex;
     flex-direction: column;
-
+    justify-content: space-between;
 }
 
 .subBanner div {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.subBanner div div {
-    flex-basis: 50%;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .subBanner img {
@@ -26,11 +31,90 @@
 
 .subBannerTitle {
     text-align: center;
-    background-color: grey;
-    padding: 1% 60px;
+    background-color: #f5b01b;
+    padding: 2.5% 30px;
 }
 
-.subBanner p {
-    margin: 0;
-    padding: 0 60px 0 20px;
+.subBannerTitle h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: white;
+}
+
+.subBannerText {
+    text-align: center;
+    padding: 7% 30px;
+    line-height: 25px;
+}
+
+.subBanner div p {
+    margin-top: 0;
+}
+
+.shopping-basket {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+@media screen and (min-width: 768px){
+    .banner {
+        padding: 7% 60px;
+    }
+
+    .subBannerTitle {
+        padding: 2.5% 60px;
+    }
+
+    .subBannerText {
+        padding: 7% 60px;
+    }
+}
+
+@media screen and (min-width: 1280px){
+    .banner {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 2% 90px;
+    }
+
+    .banner img{
+        width:50%;
+    }
+
+    .subBannerTitle {
+        padding: 2% 90px;
+    }
+
+    .subBannerTitle h3 {
+        font-size: 22px;
+    }
+
+
+    .subBannerText {
+        font-size: 18px;
+        line-height: 28px;
+        padding: 7% 90px;
+    }
+
+    .shopping-basket {
+        margin-bottom: 30px;
+    }
+
+    .subBanner div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+
+    .subBanner div p {
+        margin-bottom: 0;
+    }
+
+    .subBanner div p img {
+        width: 600px;
+    }
 }

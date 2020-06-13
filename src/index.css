@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'LeagueSpartan';
+  src: local('LeagueSpartan'), url(./fonts/LeagueSpartanBold700.otf) format('truetype');
+}

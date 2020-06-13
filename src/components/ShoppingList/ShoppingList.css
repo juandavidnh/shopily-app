@@ -1,0 +1,19 @@
+.shopping-items {
+    padding: 10% 30px;
+}
+
+@media screen and (min-width: 768px){
+    
+    .shopping-items {
+        padding: 5% 200px; 
+    }
+
+}
+
+@media screen and (min-width: 1280px){
+    
+    .shopping-items {
+        padding: 5% 500px; 
+    }
+
+}

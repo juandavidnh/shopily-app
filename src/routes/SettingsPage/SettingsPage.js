@@ -10,8 +10,8 @@ class SettingsPage extends Component {
 
     render() {
         return(
-            <section>
-                <h2>Settings</h2>
+            <section className="settingsPage">
+                <h2 className="settingsPageTitle">Settings</h2>
                 <SettingsForm supermarkets={this.props.supermarkets} pickSupermarket={this.props.pickSupermarket}/>
             </section>
         )

@@ -1,3 +1,11 @@
 .signUpPage {
-    padding: 15% 60px;
+    padding: 10% 30px;
+}
+
+h2{
+    text-align: center;
+}
+
+.signUpTitle {
+    font-family: "LeagueSpartan", sans-serif;
 }

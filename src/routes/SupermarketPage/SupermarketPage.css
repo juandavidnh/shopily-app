@@ -1,3 +1,11 @@
 .superMarketPage {
-    padding: 15% 60px;
+    padding: 10% 30px;
+}
+
+h2{
+    text-align: center;
+}
+
+.superMarketTitle {
+    font-family: "LeagueSpartan", sans-serif;
 }

@@ -9,10 +9,10 @@ class SubNav extends Component {
                 <ul>
                     <li><Link className={this.props.path==='/shopping-list'
                                 ? "bold"
-                                : null} to="/shopping-list">List</Link></li>
+                                : null} to="/shopping-list">list</Link></li>
                     <li><Link className={this.props.path==='/shopping-route'
                                 ? "bold"
-                                : null} to="/shopping-route">Route</Link></li>
+                                : null} to="/shopping-route">route</Link></li>
                 </ul>
             </nav>
         )

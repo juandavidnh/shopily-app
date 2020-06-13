@@ -46,6 +46,7 @@ class SuperMarketForm extends Component {
                 className="superMarketForm"
                 onSubmit={this.handleSubmit}
             >
+                <div className="inputField">
                 <label htmlFor="city">City:</label>
                 <select 
                     id="city" 
@@ -58,6 +59,8 @@ class SuperMarketForm extends Component {
                         <option key={index} value={supermarket.supermarket_city}>{supermarket.supermarket_city}</option>    
                     )}
                 </select><br /><br />
+                </div>
+                <div className="inputField">
                 <label htmlFor="supermarket">Supermarket:</label>
                 <select 
                     id="supermarket" 
@@ -72,6 +75,7 @@ class SuperMarketForm extends Component {
                             : null   
                     )}
                 </select><br /><br />
+                </div>
                 <button type="submit">Next</button>
             </form>
         )

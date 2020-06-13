@@ -3,8 +3,9 @@ footer {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: lightgrey;
-    padding: 1% 60px;
+    background-color: #4d4d5f;
+    padding: 3% 30px;
+    color: white;
 }
 
 .portfolio-links ul {
@@ -15,4 +16,29 @@ footer {
 .portfolio-links ul li {
     list-style-type: none;
     padding-left: 15px;
+}
+
+.portfolio-links ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+@media screen and (min-width: 768px){
+    footer {
+        padding: 4% 60px;
+    }
+
+    .hidden{
+        display: inherit !important;
+    }
+}
+
+@media screen and (min-width: 1280px){
+    footer{
+        padding: 2% 90px;
+    }
 }

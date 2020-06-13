@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import TokenService from '../../services/token-service'
+import shopilyLogo from '../../media/shopily-logo.png'
 import './Nav.css'
 
 class Nav extends Component {
@@ -16,8 +17,8 @@ class Nav extends Component {
     renderLogoutLink() {
         return(
             <ul className="mainNavControl">
-                <li className="nav-item"><Link to='/settings'>Settings</Link></li>
-                <li className="nav-item"><Link onClick={this.logout} to='/'>Log Out</Link></li>
+                <li className="nav-item"><Link to='/settings'>settings</Link></li>
+                <li className="nav-item"><Link onClick={this.logout} to='/'>log out</Link></li>
             </ul>
         )
     }
@@ -25,8 +26,8 @@ class Nav extends Component {
     renderLoginLink() {
         return(
             <ul className="mainNavControl">
-                <li className="nav-item"><Link to='/signup'>Sign up</Link></li>
-                <li className="nav-item"><Link to='/login'>Sign in</Link></li>
+                <li className="nav-item"><Link to='/signup'>sign up</Link></li>
+                <li className="nav-item"><Link to='/login'>sign in</Link></li>
             </ul>
         )
     }
@@ -34,7 +35,7 @@ class Nav extends Component {
     render() {
         return(
             <header className = "mainNav">
-                <Link className = "title" to='/'>Shopily</Link>
+                <Link className = "title" to='/'><img src={shopilyLogo} alt="shopily-logo" className="shopily-logo"/></Link>
                 <nav>
                     {TokenService.hasAuthToken()
                         ? this.renderLogoutLink()

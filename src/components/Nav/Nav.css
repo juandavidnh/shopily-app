@@ -1,10 +1,10 @@
 .mainNav {
-    background-color: lightgrey;
+    background-color: #ffffff;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 1% 60px;
+    padding: 1% 30px;
 }
 
 
@@ -21,10 +21,33 @@
 }
 
 .mainNav a {
+    font-family: 'LeagueSpartan', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.mainNav a:visited {
+    color: black;
     text-decoration: none;
 }
 
 .mainNav .title {
     color: black;
     font-weight: 600;
+}
+
+.shopily-logo{
+    height: 95px;
+}
+
+@media screen and (min-width: 768px){
+    .mainNav {
+        padding: 1% 60px;
+    }
+}
+
+@media screen and (min-width: 1280px){
+    .mainNav {
+        padding: 2% 90px;
+    }
 }

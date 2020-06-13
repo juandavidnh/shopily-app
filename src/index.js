@@ -1,3 +1,4 @@
+import './fonts/LeagueSpartanBold700.otf'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';

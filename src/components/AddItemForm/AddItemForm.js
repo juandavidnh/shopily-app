@@ -27,10 +27,9 @@ class AddItemForm extends Component {
     render() {
         return(
             <form
-                className = "add-item-form"
+                className = "addItemForm"
                 onSubmit = {this.handleSubmit}
             >
-                <label htmlFor="shopping_item">Add item:</label>
                 <select id="shopping_item" name="shopping_item">
                     {this.props.items.map((item) =>
                         <option 
