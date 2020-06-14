@@ -133,7 +133,6 @@ class App extends React.Component {
             .then(user => {
               const supermarketId = user.supermarket_id
               const userId = user.id
-              console.log(userId)
               
               ShoppingListApiService.getItems(user.id)
                 .then(shoppingItems => {
@@ -168,7 +167,6 @@ class App extends React.Component {
   //checkoff deletes items from user's shopping list
   checkoff = (userId, itemId) => {
     const itemsArray = this.state.shopping_list
-    console.log(itemsArray)
     const selectItem = itemsArray.find(item => parseInt(item.id) === parseInt(itemId))
     const indexOfItem = itemsArray.indexOf(selectItem)
 
@@ -242,9 +240,6 @@ class App extends React.Component {
             component={(props) =>
               <ShoppingListPage 
                 {...props}
-                users = {this.state.users}
-                supermarkets = {this.state.supermarkets}
-                item_list = {this.state.item_list}
                 shopping_list = {this.state.shopping_list}
                 checkoff = {this.checkoff}
               />}

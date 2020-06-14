@@ -20,6 +20,7 @@ class LandingPage extends Component {
                     <div>
                     <h2>Forget about long and confusing shopping trips</h2>
                     <h3>Shopily provides the most efficient shopping plan for you</h3>
+                    <p>To access demo account use these credentials: jd@choretastic.com, jd-password</p>
                     </div>
                 </header>
                 <section className="subBanner">
