@@ -7,15 +7,8 @@ import './ShoppingListPage.css'
 
 class ShoppingListPage extends Component {
     static defaultProps = {
-        users: [],
-        supermarkets: [],
-        item_list: [],
         shopping_list: [],
         checkoff: () => {}
-    }
-
-    state = {
-        items: []
     }
 
     render() {
