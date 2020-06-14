@@ -13,7 +13,6 @@ class AddItemPage extends Component {
 
     render() {
         const filteredItemList = this.props.item_list.filter(item => parseInt(item.supermarket_id) === parseInt(this.props.supermarket_id))
-        console.log(filteredItemList)
         const shoppingItems = this.props.shopping_list
 
         let shoppingItemCode = []
