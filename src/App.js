@@ -15,20 +15,26 @@ import TokenService from './services/token-service'
 import UserApiService from './services/user-api-service'
 import ShoppingListApiService from './services/shopping-list-service'
 import ItemsApiService from './services/items-api-service'
+import PrivateRoute from './components/Utils/PrivateRoute'
+import PublicOnlyRoute from './components/Utils/PublicRoute'
 import { withRouter } from 'react-router'
 import './App.css'
 
 
 class App extends React.Component {
   state = {
+    //supermarket_id keeps track of the supermarket the user picked
     supermarket_id: 0,
+    //user_id keeps track of the logged in user
     user_id: 0,
     item_list: [],
     shopping_list: [],
     supermarkets: [],
   }
 
+  //update state from database every time App component renders
   componentDidMount() {
+    //get all supermarkets available in database and set them as state
     ShoppingListApiService.getAllSupermarkets()
         .then(supermarkets => {
           this.setState({
@@ -39,6 +45,9 @@ class App extends React.Component {
 
     const hasToken = TokenService.getAuthToken()
 
+    //when the user signs in a token is locally stored. If a token is found, get user's shopping list items
+    //and set them to state and get all available items in order to render the whole product list when 
+    //wanting to add an item to personal shopping list.
     if(hasToken) {
       UserApiService.getOwnUser()
         .then(user => {
@@ -66,7 +75,7 @@ class App extends React.Component {
       }
   }
 
-
+  //signUp function calls /api/users/signup endpoint which returns a JWT token. The token is locally stored
   signUp = (first_name, last_name, email, password) => {
     AuthApiService.postUser({
         first_name,
@@ -96,6 +105,7 @@ class App extends React.Component {
         .catch(res => alert(res.error))
   }
 
+  //new users can pick a favorite supermarket while current users can switch their favorite supermarket
   pickSupermarket = (city, supermarket_id) => {  
     this.setState({
       supermarket_id: supermarket_id
@@ -109,6 +119,8 @@ class App extends React.Component {
       .catch(res => alert(res.error))
   }
 
+  //login calls the /api/auth/login endpoint. If email and password match those in db, a JWT token is generated 
+  //and locally stored
   login = (email, password) => {
     AuthApiService.postLoginUser({
       email: email,
@@ -143,6 +155,7 @@ class App extends React.Component {
       .catch(res => alert(res.error))
   }
 
+  //logout resets the current state to delete any trace of previous signins
   logout = () => {
     this.setState({
       supermarket_id: 0,
@@ -152,6 +165,7 @@ class App extends React.Component {
     })
   }
 
+  //checkoff deletes items from user's shopping list
   checkoff = (userId, itemId) => {
     const itemsArray = this.state.shopping_list
     console.log(itemsArray)
@@ -168,6 +182,7 @@ class App extends React.Component {
         .catch(res => alert(res.error))
   }
 
+  //addItem updates state, adding an item to the user's shopping list
   addItem = (item) => {
     const list = this.state.shopping_list
 
@@ -195,7 +210,7 @@ class App extends React.Component {
                 isLoggedIn = {this.state.isLoggedIn}
               />}
           />
-          <Route
+          <PublicOnlyRoute
             path={'/login'}
             component={(props) =>
               <LoginPage 
@@ -204,7 +219,7 @@ class App extends React.Component {
                 login = {this.login}
               />}
           />
-          <Route
+          <PublicOnlyRoute
             path={'/signup'}
             component={(props) =>
               <SignUpPage 
@@ -213,7 +228,7 @@ class App extends React.Component {
                 signup = {this.signUp}
               />}
           />
-          <Route
+          <PrivateRoute
             path={'/pick-supermarket'}
             component={(props) =>
               <SupermarketPage 
@@ -223,7 +238,7 @@ class App extends React.Component {
               />}
           />
           {(this.state.shopping_list.length >= 0) ?
-          <Route
+          <PrivateRoute
             path={'/shopping-list'}
             component={(props) =>
               <ShoppingListPage 
@@ -238,7 +253,7 @@ class App extends React.Component {
           :
           <>Loading...</>
           }
-          <Route
+          <PrivateRoute
             path={'/shopping-route'}
             component={(props) =>
               <ShoppingRoutePage 
@@ -246,7 +261,7 @@ class App extends React.Component {
                 shopping_list = {this.state.shopping_list}
               />}
           />
-          <Route
+          <PrivateRoute
             path={'/settings'}
             component={(props) =>
               <SettingsPage 
@@ -255,7 +270,7 @@ class App extends React.Component {
                 pickSupermarket = {this.pickSupermarket}
               />}
           />
-          <Route
+          <PrivateRoute
             path={'/add-item'}
             component={(props) =>
               <AddItemPage 
