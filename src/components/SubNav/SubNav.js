@@ -3,6 +3,7 @@ import { Link } from'react-router-dom'
 import './SubNav.css'
 
 class SubNav extends Component {
+    //SubNav allows user to navigate between shopping list and shopping map
     render() {
         return(
             <nav className = "subNav">

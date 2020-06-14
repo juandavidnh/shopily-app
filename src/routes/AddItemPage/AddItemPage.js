@@ -12,16 +12,19 @@ class AddItemPage extends Component {
     }
 
     render() {
+        //filter items that don't belong to the user's favorite supermarket
         const filteredItemList = this.props.item_list.filter(item => parseInt(item.supermarket_id) === parseInt(this.props.supermarket_id))
         const shoppingItems = this.props.shopping_list
 
         let shoppingItemCode = []
         let filteredItems = []
 
+        
         for(let i = 0; i < shoppingItems.length; i++) {
             shoppingItemCode.push(shoppingItems[i].code)
         }
 
+        //filter items that are already in the user's shopping_list by tracking each item's code
         for(let i = 0; i < filteredItemList.length; i++){
             if(!shoppingItemCode.includes(filteredItemList[i].code)){
                 filteredItems.push(filteredItemList[i])

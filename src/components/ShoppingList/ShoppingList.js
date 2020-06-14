@@ -10,6 +10,7 @@ class ShoppingList extends Component {
     }
 
     render() {
+        //render each shopping list item into individual rows 
         const shoppingList = this.props.items.map((item, index) => 
             <ItemRow 
                 key={index} 

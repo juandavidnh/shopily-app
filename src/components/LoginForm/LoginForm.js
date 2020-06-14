@@ -13,6 +13,7 @@ class LoginForm extends Component {
 
         const {email, password} = e.target
 
+        //call login function which validates user credentials
         this.props.login(email.value, password.value)
     }
 

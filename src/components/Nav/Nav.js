@@ -14,6 +14,7 @@ class Nav extends Component {
         TokenService.clearAuthToken()
     }
 
+    //when the user has logged in render settings and log out in Nav
     renderLogoutLink() {
         return(
             <ul className="mainNavControl">
@@ -23,6 +24,7 @@ class Nav extends Component {
         )
     }
 
+    //when user hasn't logged in render sign up and sign up in Nav
     renderLoginLink() {
         return(
             <ul className="mainNavControl">

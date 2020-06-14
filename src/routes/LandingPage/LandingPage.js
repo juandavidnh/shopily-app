@@ -12,6 +12,7 @@ class LandingPage extends Component {
     render() {
         return(
             <>
+            {/* SubNav with shopping list access will be rendered only if a valid JWT token is locally stored */}
             {TokenService.hasAuthToken() && <SubNav />}
             <main>
                 <header className="banner" role="banner">

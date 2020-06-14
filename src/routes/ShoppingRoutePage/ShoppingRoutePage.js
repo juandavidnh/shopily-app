@@ -13,6 +13,7 @@ class ShoppingRoutePage extends Component {
         return(
             <section className="shoppingRoutePage">
                 <SubNav />
+                {/* sort items by the aisle in which they are located */}
                 <ShoppingMap personalList = {this.props.shopping_list.sort((a, b) => a.aisle - b.aisle)} />
             </section>
         )

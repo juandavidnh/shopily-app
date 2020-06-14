@@ -195,6 +195,7 @@ class App extends React.Component {
 
 
   render() {
+    //main app state and functions will be passed down as props 
     return(
     <div className="App">
       <Nav logout={this.logout}/>
@@ -207,7 +208,6 @@ class App extends React.Component {
             component={(props) =>
               <LandingPage 
                 {...props}
-                isLoggedIn = {this.state.isLoggedIn}
               />}
           />
           <PublicOnlyRoute
@@ -215,7 +215,6 @@ class App extends React.Component {
             component={(props) =>
               <LoginPage 
                 {...props}
-                users = {this.state.users}
                 login = {this.login}
               />}
           />

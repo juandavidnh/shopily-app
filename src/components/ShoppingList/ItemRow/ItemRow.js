@@ -15,6 +15,7 @@ class ItemRow extends Component {
     }
 
     componentDidMount() {
+        //get logged in user unfo in order to update its shopping list
         UserApiService.getOwnUser()
             .then(user => {
                 this.setState({
@@ -27,6 +28,7 @@ class ItemRow extends Component {
     checkOffItem = (e) => {
         e.preventDefault()
         
+        //pass user id and item id in order to delete user's specific shopping list item from db
         this.props.checkoff(this.state.user.id, this.props.item.id)
     }
 

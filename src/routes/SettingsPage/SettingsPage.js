@@ -8,6 +8,7 @@ class SettingsPage extends Component {
         pickSupermarket: () => {}
     }
 
+    //pass down database supermarkets to display in drop down select
     render() {
         return(
             <section className="settingsPage">

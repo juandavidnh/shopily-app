@@ -4,7 +4,6 @@ import './LoginPage.css'
 
 class LoginPage extends Component {
     static defaultProps = {
-        users: [],
         login: () => {}
     }
 

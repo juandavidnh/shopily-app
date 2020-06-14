@@ -16,6 +16,7 @@ class AddItemForm extends Component {
         let { shopping_item } = e.target
         const itemId = shopping_item.value
 
+        // /api/shopping-list will be called in order to add a new item to the user's shopping list within db
         ShoppingListApiService.addItem(this.props.userId, itemId)
             .then(item => {
                 this.props.addItem(item)
@@ -30,6 +31,8 @@ class AddItemForm extends Component {
                 className = "addItemForm"
                 onSubmit = {this.handleSubmit}
             >
+                {/*filtered list will get mapped into the dropdown menu, so that user can pick a new item
+                to add to their shopping list */}
                 <select id="shopping_item" name="shopping_item">
                     {this.props.items.map((item) =>
                         <option 

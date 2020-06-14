@@ -57,7 +57,8 @@ class SettingsForm extends Component {
                     onChange={e => this.updateCity(e.target.value)}
                 >
                     <option value="" disabled>Choose a city</option>
-                    {this.props.supermarkets.map((supermarket, index) => 
+                    {/* map city options into dropdown menu */
+                        this.props.supermarkets.map((supermarket, index) => 
                         <option key={index} value={supermarket.supermarket_city}>{supermarket.supermarket_city}</option>    
                     )}
                 </select><br /><br />
@@ -71,7 +72,8 @@ class SettingsForm extends Component {
                     onChange={e => this.updateSupermarket(e.target.value)}
                 >
                     <option value="" disabled>Choose a supermarket</option>
-                    {this.props.supermarkets.map((supermarket, index) => 
+                    {/* map supermarkets within the selected city */
+                    this.props.supermarkets.map((supermarket, index) => 
                         this.state.city.touched && supermarket.supermarket_city === this.state.city.value 
                             ? <option key={index} value={supermarket.supermarket_name}>{supermarket.supermarket_name}</option> 
                             : null   
